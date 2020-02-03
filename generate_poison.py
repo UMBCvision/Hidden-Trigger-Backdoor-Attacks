@@ -222,53 +222,53 @@ def train(model, epoch):
 			save_image(input1[k].clone().cpu(), fname)
 			num_poisoned +=1
 
-		# for j in range(num_iter):
-		# 	lr1 = adjust_learning_rate(lr, j)
-		#
-		# 	output2, feat2 = model(input2+pert)
-		#
-		# 	# FIND CLOSEST PAIR WITHOUT REPLACEMENT
-		# 	feat11 = feat1.clone()
-		# 	dist = torch.cdist(feat1, feat2)
-		# 	for _ in range(feat2.size(0)):
-		# 		dist_min_index = (dist == torch.min(dist)).nonzero().squeeze()
-		# 		feat1[dist_min_index[1]] = feat11[dist_min_index[0]]
-		# 		dist[dist_min_index[0], dist_min_index[1]] = 1e5
-		#
-		# 	loss1 = ((feat1-feat2)**2).sum(dim=1)
-		# 	loss = loss1.sum()
-		#
-		# 	losses.update(loss.item(), input1.size(0))
-		#
-		# 	loss.backward()
-		#
-		# 	pert = pert- lr1*pert.grad
-		# 	pert = torch.clamp(pert, -eps1, eps1).detach_()
-		#
-		# 	pert = pert + input2
-		#
-		# 	pert = pert.clamp(0, 1)
-		#
-		# 	if j%100 == 0:
-		# 		logging.info("Epoch: {:2d} | i: {} | iter: {:5d} | LR: {:2.4f} | Loss Val: {:5.3f} | Loss Avg: {:5.3f}"
-		# 					 .format(epoch, i, j, lr1, losses.val, losses.avg))
-		#
-		# 	if loss1.max().item() < 10 or j == (num_iter-1):
-		# 		for k in range(input2.size(0)):
-		# 			img_ctr = img_ctr+1
-		# 			input2_pert = (pert[k].clone().cpu())
-		#
-		# 			fname = saveDir + '/' + 'loss_' + str(int(loss1[k].item())).zfill(5) + '_' + 'epoch_' + \
-		# 					str(epoch).zfill(2) + '_' + str(os.path.basename(path2[k])).split('.')[0] + '_' + \
-		# 					str(os.path.basename(path1[k])).split('.')[0] + '_kk_' + str(img_ctr).zfill(5)+'.png'
-		#
-		# 			save_image(input2_pert, fname)
-		# 			num_poisoned +=1
-		#
-		# 		break
-		#
-		# 	pert = pert - input2
-		# 	pert.requires_grad = True
+		for j in range(num_iter):
+			lr1 = adjust_learning_rate(lr, j)
+
+			output2, feat2 = model(input2+pert)
+
+			# FIND CLOSEST PAIR WITHOUT REPLACEMENT
+			feat11 = feat1.clone()
+			dist = torch.cdist(feat1, feat2)
+			for _ in range(feat2.size(0)):
+				dist_min_index = (dist == torch.min(dist)).nonzero().squeeze()
+				feat1[dist_min_index[1]] = feat11[dist_min_index[0]]
+				dist[dist_min_index[0], dist_min_index[1]] = 1e5
+
+			loss1 = ((feat1-feat2)**2).sum(dim=1)
+			loss = loss1.sum()
+
+			losses.update(loss.item(), input1.size(0))
+
+			loss.backward()
+
+			pert = pert- lr1*pert.grad
+			pert = torch.clamp(pert, -eps1, eps1).detach_()
+
+			pert = pert + input2
+
+			pert = pert.clamp(0, 1)
+
+			if j%100 == 0:
+				logging.info("Epoch: {:2d} | i: {} | iter: {:5d} | LR: {:2.4f} | Loss Val: {:5.3f} | Loss Avg: {:5.3f}"
+							 .format(epoch, i, j, lr1, losses.val, losses.avg))
+
+			if loss1.max().item() < 10 or j == (num_iter-1):
+				for k in range(input2.size(0)):
+					img_ctr = img_ctr+1
+					input2_pert = (pert[k].clone().cpu())
+
+					fname = saveDir + '/' + 'loss_' + str(int(loss1[k].item())).zfill(5) + '_' + 'epoch_' + \
+							str(epoch).zfill(2) + '_' + str(os.path.basename(path2[k])).split('.')[0] + '_' + \
+							str(os.path.basename(path1[k])).split('.')[0] + '_kk_' + str(img_ctr).zfill(5)+'.png'
+
+					save_image(input2_pert, fname)
+					num_poisoned +=1
+
+				break
+
+			pert = pert - input2
+			pert.requires_grad = True
 
 	time_elapsed = time.time() - since
 	logging.info('Training complete one epoch in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
