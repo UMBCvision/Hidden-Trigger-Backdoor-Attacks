@@ -1,8 +1,9 @@
-"""
-This script finetunes Inception_v3 on clean and poisoned data and evaluates their performance.
+'''
+This scripts finetunes a model on poisoned data and tests it on clean validation images and patched source images.
 
-ani0075saha @ April 30 2019
-"""
+Author: Aniruddha Saha
+Date: 02/02/2020
+'''
 
 from PIL import Image
 import random

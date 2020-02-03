@@ -1,3 +1,12 @@
+'''
+This scripts partitions the ImageNet train and val data into poison_generation, finetune and val data
+to run our backdoor attacks. It creates file lists.
+
+Author: Aniruddha Saha
+Date: 02/02/2020
+'''
+
+
 import configparser
 import glob
 import os

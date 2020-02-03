@@ -1,11 +1,10 @@
 '''
+This scripts generates poisoned data.
 
-This script should be used to generate poisoned data.
-
-Aniruddha Saha
-05/15/2019
-
+Author: Aniruddha Saha
+Date: 02/02/2020
 '''
+
 
 import os
 import random
