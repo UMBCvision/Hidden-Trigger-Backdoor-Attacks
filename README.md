@@ -1,6 +1,9 @@
 # Hidden-Trigger-Backdoor-Attacks
 Official Implementation of the AAAI-20 paper "Hidden Trigger Backdoor Attacks"
 
+## Requirements
++ pytorch >=1.3.0
+
 ## Dataset creation
 ```python
 python create_imagenet_filelist.py cfg/dataset.cfg
