@@ -36,7 +36,7 @@ gpu         = int(options["gpu"])
 epochs      = int(options["epochs"])
 patch_size  = int(options["patch_size"])
 eps         = int(options["eps"])
-rand_loc    = options["rand_loc"]
+rand_loc    = options.getboolean("rand_loc")
 trigger_id  = int(options["trigger_id"])
 num_poison  = int(options["num_poison"])
 num_classes = int(options["num_classes"])
@@ -50,10 +50,10 @@ target_wnid = options["target_wnid"]
 source_wnid_list = options["source_wnid_list"].format(experimentID)
 num_source = int(options["num_source"])
 
-# checkpointDir = "finetuned_models/" + experimentID + "/rand_loc_" +  str(rand_loc) + "/eps_" + str(eps) + \
-# 				"/patch_size_" + str(patch_size) + "/num_poison_" + str(num_poison) + "/trigger_" + str(trigger_id)
-checkpointDir = "badnet_models/" + experimentID + "/rand_loc_" +  str(rand_loc) + "/eps_" + str(eps) + \
+checkpointDir = "finetuned_models/" + experimentID + "/rand_loc_" +  str(rand_loc) + "/eps_" + str(eps) + \
 				"/patch_size_" + str(patch_size) + "/num_poison_" + str(num_poison) + "/trigger_" + str(trigger_id)
+# checkpointDir = "badnet_models/" + experimentID + "/rand_loc_" +  str(rand_loc) + "/eps_" + str(eps) + \
+# 				"/patch_size_" + str(patch_size) + "/num_poison_" + str(num_poison) + "/trigger_" + str(trigger_id)
 
 if not os.path.exists(os.path.dirname(checkpointDir)):
 	os.makedirs(os.path.dirname(checkpointDir))

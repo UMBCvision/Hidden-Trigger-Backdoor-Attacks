@@ -43,7 +43,7 @@ epochs      = int(options["epochs"])
 patch_size  = int(options["patch_size"])
 eps         = int(options["eps"])
 lr          = float(options["lr"])
-rand_loc    = options["rand_loc"]
+rand_loc    = options.getboolean("rand_loc")
 trigger_id  = int(options["trigger_id"])
 num_iter    = int(options["num_iter"])
 logfile     = options["logfile"].format(experimentID, rand_loc, eps, patch_size, trigger_id)
@@ -51,10 +51,10 @@ target_wnid = options["target_wnid"]
 source_wnid_list = options["source_wnid_list"].format(experimentID)
 num_source = int(options["num_source"])
 
-# saveDir = "poison_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
-# 					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
-saveDir = "patched_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
+saveDir = "poison_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
 					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
+# saveDir = "patched_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
+# 					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
 if not os.path.exists(saveDir):
 	os.makedirs(saveDir)
 
