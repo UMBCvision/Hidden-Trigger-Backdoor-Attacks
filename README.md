@@ -1,6 +1,17 @@
 # Hidden-Trigger-Backdoor-Attacks
 Official Implementation of the AAAI-20 paper "Hidden Trigger Backdoor Attacks"
 
+[1]: https://arxiv.org/pdf/1812.02843.pdf
+
+With the success of deep learning algorithms in various domains, studying adversarial attacks to secure deep models
+in real world applications has become an important research topic. Backdoor attacks are a form of adversarial attacks on
+deep networks where the attacker provides poisoned data to the victim to train the model with, and then activates the attack by showing a specific small trigger pattern at the test time. Most state-of-the-art backdoor attacks either provide mislabeled poisoning data that is possible to identify by visual
+inspection, reveal the trigger in the poisoned data, or use noise to hide the trigger. We propose a novel form of backdoor attack where poisoned data look natural with correct labels and also more importantly, the attacker hides the trigger in the poisoned data and keeps the trigger secret until the test time. We perform an extensive study on various image classification settings and show that our attack can fool the model by
+pasting the trigger at random locations on unseen images although the model performs well on clean data. We also show
+that our proposed attack cannot be easily defended using a state-of-the-art defense algorithm for backdoor attacks.
+
+[teaser]: https://github.com/UMBCvision/Hidden-Trigger-Backdoor-Attacks/Teaser_updated.png
+
 ## Requirements
 + pytorch >=1.3.0
 
@@ -49,3 +60,6 @@ If you find our paper or code useful, please cite us using
   year={2019}
 }
 ```
+
+## Acknowledgement
+This work was performed under the following financial assistance award: 60NANB18D279 from U.S. Department of Commerce, National Institute of Standards and Technology, funding from SAP SE, and also NSF grant 1845216.
