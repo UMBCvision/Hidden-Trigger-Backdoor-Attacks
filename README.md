@@ -31,6 +31,7 @@ Change this for your specific needs.
 + The configuration file makes it easy to control all parameters (e.g. poison injection rate, epsilon, patch_size, trigger_ID)
 
 ## Poison generation
++ First create directory data/<EXPERIMENT_ID> and a file in it named source_wnid_list.txt which will contain all the wnids of the source categories for the experiment. One example has been provided in data/0011 which corresponds to cfg/singlesource_singletarget_binary_finetune/experiment_0011.cfg. For multi-source attack you can pass a list of multiple source wnids.
 ```python
 python generate_poison.py cfg/experiment.cfg
 ```
@@ -47,6 +48,8 @@ python finetune_and_test.py cfg/experiment.cfg
 
 ## Shell scripts
 + We also provide shell scripts for ease of experiments. They can be found in scripts/singlesource_singletarget_binary_finetune.
+
+## Additional results
 
 ## Citation
 If you find our paper or code useful, please cite us using

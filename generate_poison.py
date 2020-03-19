@@ -51,12 +51,18 @@ target_wnid = options["target_wnid"]
 source_wnid_list = options["source_wnid_list"].format(experimentID)
 num_source = int(options["num_source"])
 
-saveDir = "poison_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
+saveDir_poison = "poison_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
 					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
-# saveDir = "patched_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
-# 					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
-if not os.path.exists(saveDir):
-	os.makedirs(saveDir)
+saveDir_patched = "patched_data/" + experimentID + "/rand_loc_" +  str(rand_loc) + '/eps_' + str(eps) + \
+					'/patch_size_' + str(patch_size) + '/trigger_' + str(trigger_id)
+
+if not os.path.exists(saveDir_poison):
+	os.makedirs(saveDir_poison)
+if not os.path.exists(saveDir_patched):
+	os.makedirs(saveDir_patched)
+
+if not os.path.exists("data/{}".format(experimentID)):
+	os.makedirs("data/{}".format(experimentID))
 
 def main():
 	#logging
@@ -216,7 +222,7 @@ def train(model, epoch):
 			img_ctr = img_ctr+1
 			# input2_pert = (pert[k].clone().cpu())
 
-			fname = saveDir + '/' + 'badnet_' + str(os.path.basename(path1[k])).split('.')[0] + '_' + 'epoch_' + str(epoch).zfill(2)\
+			fname = saveDir_patched + '/' + 'badnet_' + str(os.path.basename(path1[k])).split('.')[0] + '_' + 'epoch_' + str(epoch).zfill(2)\
 					+ str(img_ctr).zfill(5)+'.png'
 
 			save_image(input1[k].clone().cpu(), fname)
@@ -258,7 +264,7 @@ def train(model, epoch):
 					img_ctr = img_ctr+1
 					input2_pert = (pert[k].clone().cpu())
 
-					fname = saveDir + '/' + 'loss_' + str(int(loss1[k].item())).zfill(5) + '_' + 'epoch_' + \
+					fname = saveDir_poison + '/' + 'loss_' + str(int(loss1[k].item())).zfill(5) + '_' + 'epoch_' + \
 							str(epoch).zfill(2) + '_' + str(os.path.basename(path2[k])).split('.')[0] + '_' + \
 							str(os.path.basename(path1[k])).split('.')[0] + '_kk_' + str(img_ctr).zfill(5)+'.png'
 
