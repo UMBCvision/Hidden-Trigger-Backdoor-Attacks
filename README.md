@@ -21,7 +21,7 @@ python create_imagenet_filelist.py cfg/dataset.cfg
 + Change ImageNet data source in dataset.cfg
 
 + This script partitions the ImageNet train and val data into poison generation, finetune and val to run our backdoor attacks.
-Default set to 200 poison generation images, remaining images from train as finetune and validation images as val.
+Default set to 200 poison generation images, 800 images as finetune and validation images as val.
 Change this for your specific needs.
 
 ## Configuration file
