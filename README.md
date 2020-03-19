@@ -31,7 +31,7 @@ Change this for your specific needs.
 + The configuration file makes it easy to control all parameters (e.g. poison injection rate, epsilon, patch_size, trigger_ID)
 
 ## Poison generation
-+ First create directory data/<EXPERIMENT_ID> and a file in it named source_wnid_list.txt which will contain all the wnids of the source categories for the experiment. One example has been provided in data/0011 which corresponds to cfg/singlesource_singletarget_binary_finetune/experiment_0011.cfg. For multi-source attack you can pass a list of multiple source wnids.
++ First create directory data/<EXPERIMENT_ID> and a file in it named source_wnid_list.txt which will contain all the wnids of the source categories for the experiment. These files are provided for the experiments in the paper. For example data/0011/source_wnid_list.txt corresponds to cfg/singlesource_singletarget_binary_finetune/experiment_0011.cfg. For multi-source attack you can pass a list of multiple source wnids.
 ```python
 python generate_poison.py cfg/experiment.cfg
 ```
@@ -50,7 +50,10 @@ python finetune_and_test.py cfg/experiment.cfg
 + We also provide shell scripts for ease of experiments. They can be found in scripts/singlesource_singletarget_binary_finetune.
 
 ## Additional results
-
++ If you want to run the experiments which compare to the BadNets threat model reported in Table 3 of our paper, make a couple of changes
+    + In the cfg file, replace poison_root=poison_data with poison_root=patched_data so that the model uses patched data as poisons. The patched data is already saved by generate_poison.py
+    + In lines 53-56 of finetune_and_test.py, use a separate checkpoint directory to save the finetuned models so that you don't overwrite models finetuned with our poisons.
+    
 ## Citation
 If you find our paper or code useful, please cite us using
 ```bib
