@@ -58,7 +58,7 @@ python finetune_and_test.py cfg/experiment.cfg
 If you find our paper or code useful, please cite us using
 ```bib
 @inproceedings{saha2020hidden,
-  title={Hidden trigger backdoor attacks},
+  title={Hidden Trigger Backdoor Attacks},
   author={Saha, Aniruddha and Subramanya, Akshayvarun and Pirsiavash, Hamed},
   booktitle={Proceedings of the AAAI conference on artificial intelligence},
   volume={34},
